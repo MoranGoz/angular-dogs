@@ -17,11 +17,10 @@ export class DogsComponent implements OnInit {
   dateFormat = 'fullDate'
   
 
-  constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) {
-    this.dogs = dogsService.getDogs();
-   }
+  constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) {}
 
   ngOnInit() {
+    this.dogs = this.dogsService.getDogs();
     this.route.queryParams.subscribe(queryParams => {
       this.filterTerm = queryParams.name;
     });

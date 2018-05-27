@@ -3,6 +3,7 @@ import { Dog } from './dog';
 import Walk from './walk';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 const DOGS =  [
   {id: 0, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21), owner: 'Jack Daniels', walks: []},
@@ -22,15 +23,15 @@ export class DogsService {
   private dogCountSubject: Subject<number>;
 
 
-  constructor() {
+  constructor(private http : HttpClient) {
       this.scoreSubject = new Subject<number>();
       this.dogCountSubject = new Subject<number>();
       this.scoreUpdated = this.scoreSubject.asObservable();
       this.dogCountUpdated = this.dogCountSubject.asObservable();
    }
 
-  getDogs() : Dog[] {
-    return DOGS;
+  getDogs() : any {
+    return this.http.get('/api/dogs');
   }
 
   getDog(id : number) {

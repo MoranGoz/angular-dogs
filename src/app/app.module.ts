@@ -7,6 +7,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -44,7 +46,8 @@ import { ScoreComponent } from './score/score.component';
     FormsModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [DogsService],
   bootstrap: [AppComponent]

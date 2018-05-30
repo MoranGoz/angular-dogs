@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DogsService } from '../dogs.service';
 import { Dog } from '../dog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-dogs',
@@ -12,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DogsComponent implements OnInit {
 
   selectedDog : Dog;
-  dogs = new Array<Dog>();
+  dogs : Observable<Dog[]>;
   filterTerm : string;
   dateFormat = 'fullDate'
   

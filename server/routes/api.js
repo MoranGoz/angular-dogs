@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const DOGS = [
-    {id: 1, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21)},
-    {id: 2, name: 'Woof', weight: 8, birthDate: new Date(2011, 8, 12)},
-    {id: 3, name: 'Chuck', weight: 28, birthDate: new Date(2015, 5, 6)},
-    {id: 4, name: 'Barkley', weight: 4, birthDate: new Date(2012, 3, 15)},
-    {id: 5, name: 'Prince', weight: 65, birthDate: new Date(2017, 5, 4)}
+    {id: 1, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21), walks: []},
+    {id: 2, name: 'Woof', weight: 8, birthDate: new Date(2011, 8, 12), walks: []},
+    {id: 3, name: 'Chuck', weight: 28, birthDate: new Date(2015, 5, 6), walks: []},
+    {id: 4, name: 'Barkley', weight: 4, birthDate: new Date(2012, 3, 15), walks: []},
+    {id: 5, name: 'Prince', weight: 65, birthDate: new Date(2017, 5, 4), walks: []}
 ]
 
 /* GET api listing. */

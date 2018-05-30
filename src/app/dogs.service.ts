@@ -30,29 +30,25 @@ export class DogsService {
       this.dogCountUpdated = this.dogCountSubject.asObservable();
    }
 
-  getDogs() : any {
-    return this.http.get('/api/dogs');
+  getDogs() : Observable<Dog[]> {
+    return this.http.get<Dog[]>('/api/dogs');
   }
 
   getDog(id : number) {
-    return this.getDogs().find((dog) => dog.id == id);
+    return this.http.get<Dog[]>('/api/dogs/' + id);
   }
 
   addDog(dog : Dog) {
-    dog.id = this.getDogs().length + 1;
-    DOGS.push(dog);
     this.dogCountSubject.next(DOGS.length);
+    return this.http.post('/api/dogs', { dog : dog });
   }
 
   updateDog(id: number, dog: Dog) {
-    var existingDogIndex = this.getDogs().findIndex((dog) => dog.id == id);
-    DOGS[existingDogIndex] = dog;
+    return this.http.put(`/api/dogs/${id}`, { dog: dog  });
   }
 
   removeDog(id) {
-    var existingDogIndex = this.getDogs().findIndex((dog) => dog.id == id);
-    DOGS.splice(existingDogIndex, 1);
-    this.dogCountSubject.next(DOGS.length);
+    return this.http.delete(`/api/dogs/${id}`)
   }
 
   addWalk(dog : Dog, walk : Walk) {

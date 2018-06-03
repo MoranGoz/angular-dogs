@@ -3,7 +3,7 @@
         <app-filter [filterString]="filterTerm" (filterChanged)="onFilterChanged($event)"></app-filter>
         <div class="filter-header" *ngIf="filterTerm?.length > 0">Filtering dogs by name: {{ filterTerm }}</div>
         <div class="cards-container" layout-wrap layout="row">
-            <mat-card flex="30" *ngFor="let dog of dogs | async | filter:filterTerm; let idx = index" class="dog-card">
+            <mat-card flex="30" *ngFor="let dog of dogs | filter:filterTerm; let idx = index" class="dog-card">
                 <mat-card-header>
                   <mat-card-title><h3>{{ idx + 1 }} - {{ dog.name }}</h3></mat-card-title>
                 </mat-card-header>

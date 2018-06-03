@@ -2,17 +2,22 @@ const express = require('express');
 const router = express.Router();
 
 const DOGS = [
-    {id: 1, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21), walks: []},
-    {id: 2, name: 'Woof', weight: 8, birthDate: new Date(2011, 8, 12), walks: []},
-    {id: 3, name: 'Chuck', weight: 28, birthDate: new Date(2015, 5, 6), walks: []},
-    {id: 4, name: 'Barkley', weight: 4, birthDate: new Date(2012, 3, 15), walks: []},
-    {id: 5, name: 'Prince', weight: 65, birthDate: new Date(2017, 5, 4), walks: []}
+    {id: 1, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21), owner: "Abraham Lincoln", walks: []},
+    {id: 2, name: 'Woof', weight: 8, birthDate: new Date(2011, 8, 12), owner: "Jane Doe", walks: []},
+    {id: 3, name: 'Chuck', weight: 28, birthDate: new Date(2015, 5, 6), owner: "Frank Davidson", walks: []},
+    {id: 4, name: 'Barkley', weight: 4, birthDate: new Date(2012, 3, 15), owner: "Leticia Weiss", walks: []},
+    {id: 5, name: 'Prince', weight: 65, birthDate: new Date(2017, 5, 4), owner: "Janet Green", walks: []}
 ]
 
 /* GET api listing. */
 router.get('/dogs', (req, res) => {
   res.send(JSON.stringify(DOGS));
 });
+
+router.get('/dogs/:id', (req, res) => {
+    var dog = DOGS.find((dog) => dog.id.toString() == req.params.id.toString());
+    res.send(JSON.stringify(dog));
+  });
 
 router.post('/dogs', (req, res) => {
     var dog = req.body.dog;

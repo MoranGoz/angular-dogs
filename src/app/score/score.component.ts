@@ -15,13 +15,13 @@ export class ScoreComponent implements OnInit {
 
   ngOnInit() {
     this.score = this.dogsService.getScore();
-    this.dogsCount = this.dogsService.getDogs().length;
+    this.dogsService.getDogs().subscribe((dogs) => this.dogsCount = dogs.length);
     this.dogsService.scoreUpdated.subscribe((newScore) => {
       this.score = newScore;
     });
 
-    this.dogsService.dogCountUpdated.subscribe((newCount) => {
-      this.dogsCount = newCount;
+    this.dogsService.dogCountUpdated.subscribe(() => {
+      this.dogsCount =+ 1;
     })
   }
 

@@ -28,7 +28,9 @@ export class AddDogComponent implements OnInit {
   }
 
   submitDog() {
-    this.dogsService.addDog(this.dog);
+    this.dogsService.addDog(this.dog).subscribe((dog) => {
+      this.dog = dog;
+    });
   }
 
 }

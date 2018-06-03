@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class DogsComponent implements OnInit {
 
   selectedDog : Dog;
-  dogs : Observable<Dog[]>;
+  dogs : Dog[];
   filterTerm : string;
   dateFormat = 'fullDate'
   
@@ -21,19 +21,26 @@ export class DogsComponent implements OnInit {
   constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) {}
 
   ngOnInit() {
-    this.dogs = this.dogsService.getDogs();
+    this.setDogs();
     this.route.queryParams.subscribe(queryParams => {
       this.filterTerm = queryParams.name;
     });
     }
 
+  setDogs() {
+    this.dogsService.getDogs().subscribe((dogs) => { 
+      this.dogs = dogs;
+    });
+  }
 
   onFilterChanged(filterString) {
     this.router.navigate(['.'], { queryParams: { name: filterString }});
   }
 
   removeDog(id) {
-    this.dogsService.removeDog(id);
+    this.dogsService.removeDog(id).subscribe(() => {
+      this.setDogs();
+    });
   }
 
   toggleDate() {
@@ -45,7 +52,8 @@ export class DogsComponent implements OnInit {
   }
 
   handleAddWalk(walk) {
-    this.dogsService.addWalk(this.selectedDog, walk);
+    this.selectedDog.walks.push(walk);
+    this.dogsService.updateDog(this.selectedDog.id, this.selectedDog);
     this.dogsService.addScore(10);
   }
 

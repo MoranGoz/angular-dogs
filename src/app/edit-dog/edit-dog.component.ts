@@ -16,12 +16,17 @@ export class EditDogComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.dog = this.dogsService.getDog(params.id);
+      console.log("get dog");
+      this.dogsService.getDog(params.id).subscribe((dog) => {
+        this.dog = dog;
+      });
     });
   }
 
   updateDog() {
-    this.dogsService.updateDog(this.dog.id, this.dog);
+    this.dogsService.updateDog(this.dog.id, this.dog).subscribe((dog) => {
+      this.dog = dog;
+    });
     this.router.navigate(['/']);
   }
 

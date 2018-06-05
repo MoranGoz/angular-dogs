@@ -45,6 +45,7 @@ export class DogsComponent implements OnInit {
 
   handleAddWalk(walk) {
     this.dogsService.addWalk(this.selectedDog, walk);
+    this.dogsService.addScore(1);
   }
 
 

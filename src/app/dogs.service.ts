@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Dog } from './dog';
 import Walk from './walk';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 const DOGS =  [
   {id: 0, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21), owner: 'Jack Daniels', walks: []},
@@ -12,8 +14,22 @@ const DOGS =  [
 
 @Injectable()
 export class DogsService {
+  score :number = 0;
+  public scoreUpdated : Observable<number>;
+  private scoreSubject : Subject<number>;
+  
+  constructor() { 
+    this.scoreSubject = new Subject<number>();
+    this.scoreUpdated = this.scoreSubject.asObservable();
+  }
 
-  constructor() { }
+  getScore(){
+    return this.score;
+  }
+  addScore(num){
+    this.score+=num;
+    this.scoreSubject.next(this.score)
+  }
 
   getDogs() : Dog[] {
     return DOGS;

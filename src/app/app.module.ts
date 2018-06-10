@@ -22,6 +22,7 @@ import { AddWalkComponent } from './add-walk/add-walk.component';
 import { FilterComponent } from './filter/filter.component';
 import { ScoreComponent } from './score/score.component';
 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ScoreComponent } from './score/score.component';
     FormsModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [DogsService],
   bootstrap: [AppComponent]

@@ -10,3 +10,16 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
+
+
+
+
+  // removeDog(id) {
+  //   const objservable = this.http.delete('/api/dogs/' + id);
+
+  //   objservable.subscribe(()=>{
+  //     this.dogCountSubject.next();
+  //   })
+    
+  //     return objservable; 
+  // }

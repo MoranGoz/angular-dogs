@@ -16,7 +16,10 @@ export class EditDogComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.dog = this.dogsService.getDog(params.id);
+      this.dogsService.getDog(params.id).subscribe((data)=>{
+        console.log(data);
+        this.dog = data;
+      });
     });
   }
 

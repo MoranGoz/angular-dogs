@@ -29,7 +29,10 @@ export class AddDogComponent implements OnInit {
 
   submitDog() {
     this.dogsService.addDog(this.dog);
-    this.dogsService.dogCountSubject.next();
+    //this.dogsService.dogsUpdated.next();
+    this.dogsService.dogsUpdated.subscribe((dogs) => { 
+     // this.dogs = dogs;
+    });
   }
 
 }

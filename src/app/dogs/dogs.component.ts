@@ -12,30 +12,40 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DogsComponent implements OnInit {
 
   selectedDog : Dog;
-  dogs = new Array<Dog>();
+  dogs:Array<Dog> = new Array<Dog>();
   filterTerm : string;
   dateFormat = 'fullDate'
   
 
   constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) {
-    this.dogs = dogsService.getDogs();
    }
 
   ngOnInit() {
+    // this.setDogs()
+    this.dogsService.dogsUpdated.subscribe((dogs) => { 
+      this.dogs = dogs;
+    });
     this.route.queryParams.subscribe(queryParams => {
       this.filterTerm = queryParams.name;
     });
-    }
+  }
 
+  setDogs() {
+      this.dogsService.dogsUpdated.subscribe((dogs) => { 
+        this.dogs = dogs;
+      });
+  }
 
   onFilterChanged(filterString) {
     this.router.navigate(['.'], { queryParams: { name: filterString }});
   }
 
   removeDog(id) {
+    debugger;
     this.dogsService.removeDog(id);
-    this.dogsService.dogCountSubject.next();
+    // this.setDogs();
   }
+
 
   toggleDate() {
     this.dateFormat == 'fullDate' ? this.dateFormat = 'shortDate' : this.dateFormat = 'fullDate';
